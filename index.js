@@ -187,29 +187,65 @@ d3.json(
     if (err) {
       console.log('There was an error fetching data')
     } else {
+      /*
+
+      Redo verb counts to use super categories
+
+      */
+      const countVals = obj => {
+        let count = 0
+        for (let key in obj) {
+          count = count + (obj[key] || []).length
+        }
+        return count
+      }
+
+      const super_classification_counts = {}
+      for (let verb in classification_verb_counts) {
+        const newObjectsByClassification = {}
+        const { objectsByClassification } = classification_verb_counts[verb]
+        for (let classification in objectsByClassification) {
+          const curatedClassification =
+            classificationDictionary[classification] || 'Misc'
+          if (newObjectsByClassification[curatedClassification]) {
+            newObjectsByClassification[
+              curatedClassification
+            ] = newObjectsByClassification[curatedClassification].concat(
+              objectsByClassification[curatedClassification]
+            )
+          } else {
+            newObjectsByClassification[curatedClassification] =
+              objectsByClassification[curatedClassification]
+          }
+        }
+        super_classification_counts[verb] = {
+          objectsByClassification: newObjectsByClassification,
+          total: countVals(newObjectsByClassification)
+        }
+      }
+
       /* 
         Transform the data into the shape I need
       */
 
       const newData = []
-      for (let verb in classification_verb_counts) {
-        const { objectsByClassification } = classification_verb_counts[verb]
+      for (let verb in super_classification_counts) {
+        const { objectsByClassification, total } = super_classification_counts[
+          verb
+        ]
         for (let classification in objectsByClassification) {
-          const curatedClassification = classificationDictionary[classification]
           const newObj = {
             verb: verb,
-            classification: curatedClassification,
-            count: objectsByClassification[classification].length
+            classification: classification,
+            count: total
           }
           newData.push(newObj)
         }
       }
-
       const filteredData = newData.filter(
         d => classificationsFilter.indexOf(d.classification) > -1
       )
 
-      console.log('filtered data', filteredData)
       ////////////////////////////////////////////////////////////
       /////////////////// Set-up Loom parameters /////////////////
       ////////////////////////////////////////////////////////////
@@ -437,12 +473,11 @@ d3.json(
           return d.name
         })
         .on('mouseover', function(d) {
-          console.log('ON HOVERRR', d)
           const classificationCounts =
-            classification_verb_counts[d.name.toLowerCase()]
+            super_classification_counts[d.name.toLowerCase()]
+              .objectsByClassification
+
           outerLabels.selectAll('.outer-label-value').text(function(d, i) {
-            console.log(d)
-            console.log(classificationCounts, d.outername)
             const value = (classificationCounts[d.outername] || []).length
             return numFormat(value) + ' objects'
           })
@@ -457,7 +492,7 @@ d3.json(
           // Update "appears # times" text
           d3.select('#count').text(() => {
             const verb = d.name
-            const count = classification_verb_counts[verb.toLowerCase()].total
+            const count = super_classification_counts[verb.toLowerCase()].total
             return `Appears ${count} times`
           })
 
@@ -479,7 +514,7 @@ d3.json(
             .style('opacity', 0.2)
 
           const objectsByClass =
-            classification_verb_counts[d.name.toLowerCase()]
+            super_classification_counts[d.name.toLowerCase()]
               .objectsByClassification
           let objects = []
           for (let key in objectsByClass) {
@@ -489,24 +524,22 @@ d3.json(
 
           const imageUpdateSelection = d3
             .select('#images')
-            .selectAll('.image')
-            .data(objects.slice(0, 10))
+            .selectAll('.imageContainer')
+            .data(objects.slice(0, 50))
 
           imageUpdateSelection
             .enter()
             .append('div')
-            .attr('class', 'image')
+            .attr('class', 'imageContainer')
             .html(
-              d =>
-                `<div class='imageContainer'><img src='${d.primaryImageSmall}'><span>${d.title}</span></div>`
+              d => `<img src='${d.primaryImageSmall}'><span>${d.title}</span>`
             )
 
           imageUpdateSelection.html(
-            d =>
-              `<div class='imageContainer'><img src='${d.primaryImageSmall}'><span>${d.title}</span></div>`
+            d => `<img src='${d.primaryImageSmall}'><span>${d.title}</span>`
           )
 
-          //d3.select('')
+          imageUpdateSelection.exit().remove()
         })
         .on('mouseout', function(d) {
           stringGroup.selectAll('path').style('opacity', 0.85)
@@ -519,3 +552,4 @@ d3.json(
     }
   }
 )
+
