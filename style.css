@@ -3,7 +3,7 @@ html {
 }
 body {
   font-family: 'Playfair Display', serif;
-  font-size: 12px;
+  font-size: 14.5px;
   fill: #b9b9b9;
 }
 h1,
@@ -12,10 +12,12 @@ h3 {
   text-align: center;
 }
 h1 {
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 400;
 }
 h2 {
+  font-style: oblique 40deg;
+  font-size: 14.5px;
   font-weight: 400;
 }
 header {
@@ -38,6 +40,7 @@ header {
 #verb-info {
   position: absolute;
   width: 100%;
+  top: 350px;
 }
 
 #definition {
@@ -78,8 +81,9 @@ header {
 }
 .outer-label-value {
   font-size: 1.3rem;
-  fill: #b9b9b9;
+  fill: #acacac;
 }
+
 #images {
   display: flex;
   flex-wrap: wrap;
@@ -88,8 +92,16 @@ header {
 #images .imageContainer {
   display: flex;
   margin: 1rem;
+  width: 30%;
 }
 
+#images .imageContainer span {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
 #images .imageContainer img {
-  height: 75px;
+  max-height: 75px;
+  max-width: 75px;
 }
