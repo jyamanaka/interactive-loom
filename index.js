@@ -1,140 +1,3 @@
-const classificationDictionary = {
-  Jewelry: 'Jewelry',
-  'Jewelry, Precious Metals and Precious Stones': 'Jewelry',
-  Paintings: 'Paintings',
-  'Wood-Paintings': 'Paintings',
-  Albums: 'Misc',
-  'Chess Sets': 'Misc',
-  Ephemera: 'Misc',
-  'Equestrian Equipment-Bits': 'Misc',
-  'Equestrian Equipment-Saddles': 'Misc',
-  'Equestrian Equipment-Shaffrons': 'Misc',
-  'Equestrian Equipment-Stirrups': 'Misc',
-  Hardstone: 'Misc',
-  Inrō: 'Misc',
-  Installations: 'Misc',
-  Ivories: 'Misc',
-  'Ivories and Bone': 'Misc',
-  'Ivory/Bone-Ornaments': 'Misc',
-  'Miscellaneous-Paper': 'Misc',
-  'Natural Substances': 'Misc',
-  Rubbing: 'Misc',
-  'Aerophone-Reed Vibrated-single reed cylindrical': 'Musical Instrument',
-  'Chordophone-Harp': 'Musical Instruments',
-  'Chordophone-Lute-plucked-fretted': 'Musical Instruments',
-  'Chordophone-Zither-plucked': 'Musical Instruments',
-  'Chordophone-Zither-plucked-long zither': 'Musical Instruments',
-  'Idiophone-Shaken-jingle': 'Musical Instruments',
-  'Membranophone-double-headed / cylindrical drum': 'Musical Instruments',
-  'Membranophone-double-headed / waisted drum': 'Musical Instruments',
-  Books: 'Manuscripts/Codexs',
-  Codices: 'Manuscripts/Codexs',
-  'Illustrated Books': 'Manuscripts/Codexs',
-  'Manuscripts and Illuminations': 'Manuscripts/Codexs',
-  Ceramics: 'Ceramics',
-  'Ceramics-Containers': 'Ceramics',
-  'Ceramics-Porcelain': 'Ceramics',
-  'Ceramics-Pottery': 'Ceramics',
-  'Ceramics-Sculpture': 'Ceramics',
-  'Ceramics-Tiles': 'Ceramics',
-  'Clay-Tablets-Inscribed': 'Ceramics',
-  'Clay-Tablets-Inscribed-Seal Impressions': 'Ceramics',
-  'Firearms-Guns-Flintlock': 'Arms & Armor',
-  'Firearms-Guns-Matchlock': 'Arms & Armor',
-  'Firearms-Pistols-Flintlock': 'Arms & Armor',
-  'Firearms-Pistols-Revolvers': 'Arms & Armor',
-  Helmets: 'Arms & Armor',
-  'Shafted Weapons': 'Arms & Armor',
-  Shields: 'Arms & Armor',
-  Glass: 'Glass',
-  'Glass-Sculpture': 'Glass',
-  Bronzes: 'Metalworks',
-  Coins: 'Metalworks',
-  'Gold and Silver': 'Metalworks',
-  'Medals and Plaquettes': 'Metalworks',
-  Metal: 'Metalworks',
-  'Metal-Implements': 'Metalworks',
-  'Metal-Ornaments': 'Metalworks',
-  Metalwork: 'Metalworks',
-  'Metalwork-Bronze': 'Metalworks',
-  'Metalwork-Copper': 'Metalworks',
-  'Metalwork-Copper alloy': 'Metalworks',
-  'Metalwork-Electrotype': 'Metalworks',
-  'Metalwork-Gilt Bronze': 'Metalworks',
-  'Metalwork-Gold': 'Metalworks',
-  'Metalwork-Implements': 'Metalworks',
-  'Metalwork-Iron': 'Metalworks',
-  'Metalwork-Ornaments': 'Metalworks',
-  'Metalwork-Pewter': 'Metalworks',
-  'Metalwork-Silver': 'Metalworks',
-  'Metalwork-Silver In Combination': 'Metalworks',
-  'Miscellaneous-Buckles & Ornament': 'Metalworks',
-  Silver: 'Metalworks',
-  Swords: 'Metalworks',
-  Architecture: 'Photography',
-  Photographs: 'Photographs',
-  Costumes: 'Textiles',
-  'Costumes-Embroidered': 'Textiles',
-  Textiles: 'Textiles',
-  'Textiles-Costumes': 'Textiles',
-  'Textiles-Embroidered': 'Textiles',
-  'Textiles-Laces': 'Textiles',
-  'Textiles-Rugs': 'Textiles',
-  'Textiles-Tapestries': 'Textiles',
-  'Textiles-Velvets': 'Textiles',
-  'Textiles-Woven': 'Textiles',
-  Drawings: 'Drawings',
-  Ink: 'Drawings',
-  Prints: 'Drawings',
-  Calligraphy: 'Drawings/Prints',
-  Enamels: 'Furniture/Decorative Arts',
-  'Enamels-Champlevé': 'Furniture/Decorative Arts',
-  Frames: 'Furniture/Decorative Arts',
-  Furniture: 'Furniture/Decorative Arts',
-  'Gaming pieces': 'Furniture/Decorative Arts',
-  Lacquer: 'Furniture/Decorative Arts',
-  Screens: 'Furniture/Decorative Arts',
-  Vases: 'Furniture/Decorative Arts',
-  Wood: 'Furniture/Decorative Arts',
-  'Wood-Furniture': 'Furniture/Decorative Arts',
-  Woodwork: 'Furniture/Decorative Arts',
-  'Woodwork-Furniture': 'Furniture/Decorative Arts',
-  'Metal-Sculpture': 'Sculpture',
-  Sculpture: 'Sculpture',
-  'Sculpture-Architectural-Stone': 'Sculpture',
-  'Sculpture-Bronze': 'Sculpture',
-  'Sculpture-Miniature': 'Sculpture',
-  'Sculpture-Stone': 'Sculpture',
-  'Sculpture-Wood': 'Sculpture',
-  'Stone Sculpture': 'Sculpture',
-  'Stone-Containers': 'Sculpture',
-  'Stone-Implements': 'Sculpture',
-  'Stone-Ornaments': 'Sculpture',
-  'Stone-Sculpture': 'Sculpture',
-  Terracottas: 'Sculpture',
-  'Wood-Sculpture': 'Sculpture'
-}
-
-/* 
-  Filter out only the classifications I want
-*/
-const classificationsFilter = [
-  'Arms & Armor',
-  'Ceramics',
-  'Drawing/Prints',
-  'Furniture/Decorative Arts',
-  'Glass',
-  'Jewelry',
-  'Manuscript/Codexs',
-  'Metalworks',
-  'Musical Instruments',
-  'Paintings',
-  'Photography',
-  'Sculpture',
-  'Textiles',
-  'Misc'
-]
-
 const definitions = {
   rotate: {
     POS: 'ro•tate/verb:',
@@ -142,7 +5,7 @@ const definitions = {
   },
   encircle: {
     POS: 'en•cir•cle/verb:',
-    definition: 'To form a circle around; surround.'
+    definition: 'To form a circle around surround.'
   },
   simplify: {
     POS: 'sim•pli•fy/verb:',
@@ -166,6 +29,8 @@ const definitions = {
   }
 }
 
+const capitalize = word => `${word[0].toUpperCase()}${word.slice(1)}`
+
 ////////////////////////////////////////////////////////////
 ////////////////////// Create SVG //////////////////////////
 ////////////////////////////////////////////////////////////
@@ -182,48 +47,11 @@ var svg = d3
   .attr('height', height + margin.top + margin.bottom)
 
 d3.json(
-  'https://gist.githubusercontent.com/mell0kat/f56adeba9298171baf01d83a8fb54dc1/raw/f4b9b8d549662b3eede3bf0b8e42885318576d43/the-met-data.json',
-  (err, classification_verb_counts) => {
+  'https://gist.githubusercontent.com/mell0kat/f56adeba9298171baf01d83a8fb54dc1/raw/d6471202ce876cc8cf151d406e0d387eb892960d/the-met-data.json',
+  (err, super_classification_counts) => {
     if (err) {
       console.log('There was an error fetching data')
     } else {
-      /*
-
-      Redo verb counts to use super categories
-
-      */
-      const countVals = obj => {
-        let count = 0
-        for (let key in obj) {
-          count = count + (obj[key] || []).length
-        }
-        return count
-      }
-
-      const super_classification_counts = {}
-      for (let verb in classification_verb_counts) {
-        const newObjectsByClassification = {}
-        const { objectsByClassification } = classification_verb_counts[verb]
-        for (let classification in objectsByClassification) {
-          const curatedClassification =
-            classificationDictionary[classification] || 'Misc'
-          if (newObjectsByClassification[curatedClassification]) {
-            newObjectsByClassification[
-              curatedClassification
-            ] = newObjectsByClassification[curatedClassification].concat(
-              objectsByClassification[curatedClassification]
-            )
-          } else {
-            newObjectsByClassification[curatedClassification] =
-              objectsByClassification[curatedClassification]
-          }
-        }
-        super_classification_counts[verb] = {
-          objectsByClassification: newObjectsByClassification,
-          total: countVals(newObjectsByClassification)
-        }
-      }
-
       /* 
         Transform the data into the shape I need
       */
@@ -242,9 +70,11 @@ d3.json(
           newData.push(newObj)
         }
       }
-      const filteredData = newData.filter(
-        d => classificationsFilter.indexOf(d.classification) > -1
-      )
+
+      console.log(newData)
+      // const filteredData = newData.filter(
+      //   d => classificationsFilter.indexOf(d.classification) > -1
+      // )
 
       ////////////////////////////////////////////////////////////
       /////////////////// Set-up Loom parameters /////////////////
@@ -274,7 +104,7 @@ d3.json(
       var loom = d3
         .loom()
         // ADJUSTABLE!
-        //sets the amount of white space that goes between the different outer arcs; a bigger value means more whitespace.
+        //sets the amount of white space that goes between the different outer arcs a bigger value means more whitespace.
         .padAngle(0.05)
 
         .sortSubgroups(sortVerb)
@@ -320,7 +150,7 @@ d3.json(
         '#948d71',
         '#5d504a',
         '#4b3935',
-        '#d36d0f',
+        '#7d5a32',
         '#5c4c47',
         '#998675',
         '#736357',
@@ -330,7 +160,7 @@ d3.json(
 
       var color = d3
         .scaleOrdinal() //setting up the variable
-        .domain(classificationsFilter)
+        .domain(Object.keys(super_classification_counts))
         .range(colors)
       ////////////////////////////////////////////////////////////
       ///////////////////// Read in data /////////////////////////
@@ -347,7 +177,7 @@ d3.json(
             (height / 2 + margin.top) +
             ')'
         )
-        .datum(loom(filteredData))
+        .datum(loom(newData))
 
       ////////////////////////////////////////////////////////////
       ////////////////////// Draw outer arcs /////////////////////
@@ -407,27 +237,19 @@ d3.json(
             (d.angle > Math.PI ? 'rotate(180)' : '')
           )
         })
+        .html(d => {
+          const labelWords = d.outername.split(' ')
+          return labelWords.map((_d, i) => {
+            return (
+              `<text class='outer-label' dy='${0.35 + 1.15 * i}em' fill=${color(
+                d.outername
+              )}>${capitalize(_d)}</text>` +
+              `<text class='outer-label-value' dy='${1.5 *
+                labelWords.length}em'>${numFormat(d.value)} objects</text>`
+            )
+          })
+        })
 
-      //The outer name
-      outerLabels
-        .append('text')
-        .attr('class', 'outer-label')
-        .attr('dy', '.35em')
-        .style('fill', function(d, i) {
-          return color(d.outername)
-        })
-        .text(function(d, i) {
-          return d.outername
-        })
-
-      //The value below it
-      outerLabels
-        .append('text')
-        .attr('class', 'outer-label-value')
-        .attr('dy', '1.5em')
-        .text(function(d, i) {
-          return numFormat(d.value) + ' objects'
-        })
       ////////////////////////////////////////////////////////////
       //////////////////// Draw inner strings ////////////////////
       ////////////////////////////////////////////////////////////
@@ -477,9 +299,20 @@ d3.json(
             super_classification_counts[d.name.toLowerCase()]
               .objectsByClassification
 
-          outerLabels.selectAll('.outer-label-value').text(function(d, i) {
-            const value = (classificationCounts[d.outername] || []).length
-            return numFormat(value) + ' objects'
+          outerLabels.html(_d => {
+            console.log(_d.outername, classificationCounts)
+            const count = (classificationCounts[_d.outername] || []).length
+            const labelWords = _d.outername.split(' ')
+            return labelWords.map((__d, i) => {
+              return (
+                `<text class='outer-label' dy='${0.35 +
+                  1.15 * i}em' fill=${color(_d.outername)}>${capitalize(
+                  __d
+                )}</text>` +
+                `<text class='outer-label-value' dy='${1.5 *
+                  labelWords.length}em'>${numFormat(count)} objects</text>`
+              )
+            })
           })
 
           // Update label opacities
@@ -512,7 +345,16 @@ d3.json(
             .selectAll('path')
             .filter(_d => _d.inner.name !== d.name)
             .style('opacity', 0.2)
+        })
+        .on('mouseout', function(d) {
+          stringGroup.selectAll('path').style('opacity', 0.85)
 
+          innerLabelGroup
+            .selectAll('.inner-label')
+            .style('opacity', 1)
+            .style('font-size', '1.6rem')
+        })
+        .on('click', function(d) {
           const objectsByClass =
             super_classification_counts[d.name.toLowerCase()]
               .objectsByClassification
@@ -527,7 +369,7 @@ d3.json(
           const imageUpdateSelection = d3
             .select('#images')
             .selectAll('.imageContainer')
-            .data(objects)
+            .data(d3.shuffle(objects))
 
           imageUpdateSelection
             .enter()
@@ -544,14 +386,9 @@ d3.json(
             .style('opacity', 1)
 
           imageUpdateSelection.exit().remove()
-        })
-        .on('mouseout', function(d) {
-          stringGroup.selectAll('path').style('opacity', 0.85)
 
-          innerLabelGroup
-            .selectAll('.inner-label')
-            .style('opacity', 1)
-            .style('font-size', '1.6rem')
+          // show overlay component
+          d3.select('#overlay').style('display', 'flex')
         })
     }
   }
