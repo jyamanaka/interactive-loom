@@ -47,7 +47,7 @@ var svg = d3
   .attr('height', height + margin.top + margin.bottom)
 
 d3.json(
-  'https://gist.githubusercontent.com/mell0kat/f56adeba9298171baf01d83a8fb54dc1/raw/d6471202ce876cc8cf151d406e0d387eb892960d/the-met-data.json',
+  'https://gist.githubusercontent.com/mell0kat/f56adeba9298171baf01d83a8fb54dc1/raw/b565d21f3f81a3517938f75de09a96a130f36284/the-met-data.json',
   (err, super_classification_counts) => {
     if (err) {
       console.log('There was an error fetching data')
@@ -388,8 +388,30 @@ d3.json(
           imageUpdateSelection.exit().remove()
 
           // show overlay component
-          d3.select('#overlay').style('display', 'flex')
+          d3.selectAll('.overlay').style('display', 'flex')
         })
     }
   }
 )
+
+d3.select('#images .overlay.right').on('click', () => {
+  d3.select('#images').property(
+    'scrollLeft',
+    d3.select('#images').property('scrollLeft') + 200
+  )
+})
+
+d3.select('#images .overlay.left').on('click', () => {
+  d3.select('#images').property(
+    'scrollLeft',
+    d3.select('#images').property('scrollLeft') - 200
+  )
+})
+
+d3.select(window).on('scroll', () => {
+  if (window.pageYOffset <= 0) {
+    d3.select('h1').classed('fixedHeader', false)
+  } else {
+    d3.select('h1').classed('fixedHeader', true)
+  }
+})
