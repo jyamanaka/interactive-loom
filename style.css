@@ -141,8 +141,8 @@ h1.fixedHeader {
 }
 #images .imageContainer {
   margin: 10px;
-  height: 130px;
-  width: 130px;
+  height: 150px;
+  width: 150px;
   flex: 0 0 auto;
 }
 
