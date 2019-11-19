@@ -47,7 +47,7 @@ var svg = d3
   .attr('height', height + margin.top + margin.bottom)
 
 d3.json(
-  'https://gist.githubusercontent.com/mell0kat/f56adeba9298171baf01d83a8fb54dc1/raw/b565d21f3f81a3517938f75de09a96a130f36284/the-met-data.json',
+  'https://gist.githubusercontent.com/jyamanaka/1bbf5d245d64942d292f50dae1574e32/raw/3c4c9c3fc37c760ef8f668b92c793c192ccdf236/metdata.json',
   (err, super_classification_counts) => {
     if (err) {
       console.log('There was an error fetching data')
